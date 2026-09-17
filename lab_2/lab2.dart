@@ -1,5 +1,4 @@
 // LAB 2 - DART ESSENTIALS PRACTICE LAB
-// File gồm 5 bài tập cơ bản của Dart
 
 import 'dart:async';
 import 'Car.dart';
