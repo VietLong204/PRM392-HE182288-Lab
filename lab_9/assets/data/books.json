@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "title": "Flutter in Action",
+    "author": "Eric Windmill",
+    "category": "Mobile Dev"
+  },
+  {
+    "id": 2,
+    "title": "Clean Code",
+    "author": "Robert C. Martin",
+    "category": "Software Eng"
+  },
+  {
+    "id": 3,
+    "title": "Dart Apprentice",
+    "author": "Jonathan Sande",
+    "category": "Programming"
+  },
+  {
+    "id": 4,
+    "title": "Design Patterns",
+    "author": "Gang of Four",
+    "category": "Architecture"
+  }
+]

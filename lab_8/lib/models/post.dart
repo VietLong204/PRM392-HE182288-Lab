@@ -1,5 +1,5 @@
-/// Model class representing a Post from the JSONPlaceholder API.
-/// Each Post has: id, userId, title, and body.
+/// Model đại diện cho một bài viết (Post) từ JSONPlaceholder API
+/// Bao gồm các trường: id, userId, title, body
 class Post {
   final int id;
   final int userId;
@@ -13,7 +13,7 @@ class Post {
     required this.body,
   });
 
-  /// Factory constructor: converts a JSON map → Post object.
+  // Factory constructor chuyển từ JSON Map sang đối tượng Post
   factory Post.fromJson(Map<String, dynamic> json) {
     return Post(
       id: json['id'] as int,
@@ -23,7 +23,7 @@ class Post {
     );
   }
 
-  /// Converts Post object → JSON map (used for POST requests).
+  // Chuyển đối tượng Post sang JSON Map (dùng khi gửi POST request)
   Map<String, dynamic> toJson() {
     return {
       'id': id,
@@ -31,10 +31,5 @@ class Post {
       'title': title,
       'body': body,
     };
-  }
-
-  @override
-  String toString() {
-    return 'Post(id: $id, userId: $userId, title: $title)';
   }
 }
