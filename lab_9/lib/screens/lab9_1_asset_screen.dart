@@ -12,79 +12,39 @@ class Lab91AssetScreen extends StatefulWidget {
 
 class _Lab91AssetScreenState extends State<Lab91AssetScreen> {
   List<Book> _books = [];
-  bool _isLoading = true;
 
   @override
   void initState() {
     super.initState();
-    _loadBooksFromAssets();
+    _loadBooks();
   }
 
-  Future<void> _loadBooksFromAssets() async {
-    setState(() => _isLoading = true);
-
-    try {
-      final String jsonString =
-          await rootBundle.loadString('assets/data/books.json');
-
-      final List<dynamic> jsonList = jsonDecode(jsonString);
-
-      setState(() {
-        _books = jsonList.map((item) => Book.fromJson(item)).toList();
-        _isLoading = false;
-      });
-    } catch (e) {
-      setState(() => _isLoading = false);
-    }
+  Future<void> _loadBooks() async {
+    final jsonString = await rootBundle.loadString('assets/data/books.json');
+    final List<dynamic> jsonList = jsonDecode(jsonString);
+    setState(() {
+      _books = jsonList.map((item) => Book.fromJson(item)).toList();
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Lab 9.1: Read JSON Assets'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.refresh),
-            onPressed: _loadBooksFromAssets,
-            tooltip: 'Tải lại',
-          ),
-        ],
-      ),
-      body: _isLoading
+      appBar: AppBar(title: const Text('Lab 9.1: Read JSON Assets')),
+      body: _books.isEmpty
           ? const Center(child: CircularProgressIndicator())
-          : _books.isEmpty
-              ? const Center(child: Text('Không có dữ liệu trong file asset.'))
-              : ListView.builder(
-                  padding: const EdgeInsets.all(12),
-                  itemCount: _books.length,
-                  itemBuilder: (context, index) {
-                    final book = _books[index];
-                    return Card(
-                      elevation: 2,
-                      margin: const EdgeInsets.symmetric(vertical: 6),
-                      child: ListTile(
-                        leading: CircleAvatar(
-                          backgroundColor: Colors.blue.shade100,
-                          child: Text('${book.id}',
-                              style: TextStyle(color: Colors.blue.shade800)),
-                        ),
-                        title: Text(
-                          book.title,
-                          style: const TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        subtitle: Text('Tác giả: ${book.author}'),
-                        trailing: Chip(
-                          label: Text(
-                            book.category,
-                            style: const TextStyle(fontSize: 12),
-                          ),
-                          backgroundColor: Colors.blue.shade50,
-                        ),
-                      ),
-                    );
-                  },
-                ),
+          : ListView.builder(
+              itemCount: _books.length,
+              itemBuilder: (context, index) {
+                final book = _books[index];
+                return ListTile(
+                  leading: CircleAvatar(child: Text('${book.id}')),
+                  title: Text(book.title),
+                  subtitle: Text(book.author),
+                  trailing: Text(book.category),
+                );
+              },
+            ),
     );
   }
 }
