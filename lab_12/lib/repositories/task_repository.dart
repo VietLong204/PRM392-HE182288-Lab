@@ -1,7 +1,5 @@
 import '../models/task.dart';
 
-/// Repository class for managing Task CRUD operations.
-/// Acts as the data layer for the application.
 class TaskRepository {
   final List<Task> _tasks = [];
 
@@ -18,14 +16,24 @@ class TaskRepository {
   void updateTask(String id, String newTitle) {
     final index = _tasks.indexWhere((task) => task.id == id);
     if (index != -1) {
-      _tasks[index] = _tasks[index].copyWith(title: newTitle);
+      final task = _tasks[index];
+      _tasks[index] = Task(
+        id: task.id,
+        title: newTitle,
+        completed: task.completed,
+      );
     }
   }
 
   void toggleTask(String id) {
     final index = _tasks.indexWhere((task) => task.id == id);
     if (index != -1) {
-      _tasks[index] = _tasks[index].toggle();
+      final task = _tasks[index];
+      _tasks[index] = Task(
+        id: task.id,
+        title: task.title,
+        completed: !task.completed,
+      );
     }
   }
 

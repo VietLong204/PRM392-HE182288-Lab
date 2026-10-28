@@ -5,17 +5,6 @@ import '../providers/task_provider.dart';
 import '../widgets/task_tile.dart';
 import 'task_detail_screen.dart';
 
-/// TaskListScreen — Optimized with Provider Selector.
-///
-/// Exercise 12.1 Optimizations Applied:
-/// 1. Uses Selector<TaskProvider, List<Task>> instead of Consumer/watch
-///    to only rebuild the list portion when tasks change.
-/// 2. TaskTile extracted into a separate widget to reduce rebuild scope.
-/// 3. const constructors used on all static widgets.
-/// 4. ValueKey(task.id) assigned to each TaskTile for efficient diffing.
-///
-/// Exercise 12.2 Optimization:
-/// - precacheImage() called in didChangeDependencies for app logo.
 class TaskListScreen extends StatefulWidget {
   const TaskListScreen({super.key});
 
@@ -29,7 +18,7 @@ class _TaskListScreenState extends State<TaskListScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    // Exercise 12.2: Pre-cache the app logo image for smoother rendering
+    // Pre-cache logo để tối ưu load ảnh (Exercise 12.2)
     precacheImage(const AssetImage('assets/images/taskly_logo.png'), context);
   }
 
@@ -47,8 +36,8 @@ class _TaskListScreenState extends State<TaskListScreen> {
     }
   }
 
-  Future<void> _openDetail(Task task) async {
-    await Navigator.push(
+  void _openDetail(Task task) {
+    Navigator.push(
       context,
       MaterialPageRoute(
         builder: (_) => TaskDetailScreen(task: task),
@@ -63,15 +52,10 @@ class _TaskListScreenState extends State<TaskListScreen> {
         title: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            // Exercise 12.2: Optimized image (resized to 128x128)
             Image.asset(
               'assets/images/taskly_logo.png',
               width: 32,
               height: 32,
-              // Use cacheWidth/cacheHeight to decode at display size,
-              // saving memory and improving performance
-              cacheWidth: 64,
-              cacheHeight: 64,
             ),
             const SizedBox(width: 8),
             const Text('Taskly'),
@@ -80,7 +64,6 @@ class _TaskListScreenState extends State<TaskListScreen> {
       ),
       body: Column(
         children: [
-          // Input section — static, does not depend on task list
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Row(
@@ -92,7 +75,6 @@ class _TaskListScreenState extends State<TaskListScreen> {
                     decoration: const InputDecoration(
                       hintText: 'Enter new task...',
                       border: OutlineInputBorder(),
-                      isDense: true,
                     ),
                     onSubmitted: (_) => _addTask(),
                   ),
@@ -107,18 +89,14 @@ class _TaskListScreenState extends State<TaskListScreen> {
             ),
           ),
           const Divider(height: 1),
-          // Exercise 12.1: Use Selector to only rebuild the list
-          // when the task list actually changes, not on every provider update.
+          // Dùng Selector để chỉ rebuild ListView khi danh sách tasks thay đổi (Exercise 12.1)
           Expanded(
             child: Selector<TaskProvider, List<Task>>(
               selector: (_, provider) => provider.tasks,
               builder: (context, tasks, child) {
                 if (tasks.isEmpty) {
                   return const Center(
-                    child: Text(
-                      'No tasks yet. Add one!',
-                      style: TextStyle(fontSize: 16, color: Colors.grey),
-                    ),
+                    child: Text('No tasks yet. Add one!'),
                   );
                 }
 

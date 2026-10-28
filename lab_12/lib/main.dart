@@ -8,14 +8,6 @@ void main() {
   runApp(const TasklyApp());
 }
 
-/// TasklyApp — Root widget using ChangeNotifierProvider.
-///
-/// Exercise 12.1: ChangeNotifierProvider wraps the app so that
-/// Selector and Consumer can be used in child widgets to
-/// selectively rebuild only when relevant state changes.
-///
-/// Exercise 12.4: All debug print() statements removed.
-/// const constructors applied wherever possible.
 class TasklyApp extends StatelessWidget {
   const TasklyApp({super.key});
 

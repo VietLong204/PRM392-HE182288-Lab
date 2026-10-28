@@ -3,17 +3,10 @@ import 'package:provider/provider.dart';
 import '../models/task.dart';
 import '../providers/task_provider.dart';
 
-/// TaskDetailScreen — Edit a task's title.
-///
-/// Uses context.read<TaskProvider>() to update the task without
-/// unnecessary rebuilds (no watching needed on this screen).
 class TaskDetailScreen extends StatefulWidget {
   final Task task;
 
-  const TaskDetailScreen({
-    super.key,
-    required this.task,
-  });
+  const TaskDetailScreen({super.key, required this.task});
 
   @override
   State<TaskDetailScreen> createState() => _TaskDetailScreenState();
@@ -58,7 +51,6 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             TextField(
               key: const Key('detailTitleField'),

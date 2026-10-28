@@ -1,17 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/task.dart';
 
-/// TaskTile — Extracted widget for a single task item.
-///
-/// Exercise 12.1: Extracting TaskTile into a separate widget reduces
-/// unnecessary rebuilds. Each TaskTile is a self-contained widget with
-/// its own build method, so Flutter can skip rebuilding tiles that
-/// haven't changed.
-///
-/// Key optimizations applied:
-/// - Uses ValueKey(task.id) for efficient list diffing
-/// - Uses const constructors where possible
-/// - Separated from the parent list to minimize rebuild scope
 class TaskTile extends StatelessWidget {
   final Task task;
   final VoidCallback onToggle;
@@ -19,11 +8,11 @@ class TaskTile extends StatelessWidget {
   final VoidCallback onTap;
 
   const TaskTile({
+    super.key,
     required this.task,
     required this.onToggle,
     required this.onDelete,
     required this.onTap,
-    super.key,
   });
 
   @override

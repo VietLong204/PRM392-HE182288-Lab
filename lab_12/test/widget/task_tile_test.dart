@@ -6,7 +6,7 @@ import 'package:taskly/widgets/task_tile.dart';
 void main() {
   group('TaskTile Widget Tests', () {
     testWidgets('should display task title', (tester) async {
-      const task = Task(id: '1', title: 'Test Task');
+      final task = Task(id: '1', title: 'Test Task');
 
       await tester.pumpWidget(
         MaterialApp(
@@ -26,7 +26,7 @@ void main() {
 
     testWidgets('should show unchecked checkbox for incomplete task',
         (tester) async {
-      const task = Task(id: '1', title: 'Task', completed: false);
+      final task = Task(id: '1', title: 'Task', completed: false);
 
       await tester.pumpWidget(
         MaterialApp(
@@ -47,7 +47,7 @@ void main() {
 
     testWidgets('should show checked checkbox for completed task',
         (tester) async {
-      const task = Task(id: '1', title: 'Done', completed: true);
+      final task = Task(id: '1', title: 'Done', completed: true);
 
       await tester.pumpWidget(
         MaterialApp(
@@ -68,7 +68,7 @@ void main() {
 
     testWidgets('should show strikethrough for completed task',
         (tester) async {
-      const task = Task(id: '1', title: 'Done', completed: true);
+      final task = Task(id: '1', title: 'Done', completed: true);
 
       await tester.pumpWidget(
         MaterialApp(
@@ -90,7 +90,7 @@ void main() {
     testWidgets('should call onToggle when checkbox is tapped',
         (tester) async {
       bool toggled = false;
-      const task = Task(id: '1', title: 'Task');
+      final task = Task(id: '1', title: 'Task');
 
       await tester.pumpWidget(
         MaterialApp(
@@ -112,7 +112,7 @@ void main() {
     testWidgets('should call onDelete when delete icon is tapped',
         (tester) async {
       bool deleted = false;
-      const task = Task(id: '1', title: 'Task');
+      final task = Task(id: '1', title: 'Task');
 
       await tester.pumpWidget(
         MaterialApp(
@@ -133,7 +133,7 @@ void main() {
 
     testWidgets('should call onTap when tile is tapped', (tester) async {
       bool tapped = false;
-      const task = Task(id: '1', title: 'Task');
+      final task = Task(id: '1', title: 'Task');
 
       await tester.pumpWidget(
         MaterialApp(
@@ -153,7 +153,7 @@ void main() {
     });
 
     testWidgets('should have a ValueKey with task id', (tester) async {
-      const task = Task(id: 'abc123', title: 'Task');
+      final task = Task(id: 'abc123', title: 'Task');
 
       await tester.pumpWidget(
         MaterialApp(

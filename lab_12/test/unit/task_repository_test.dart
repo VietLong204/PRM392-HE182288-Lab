@@ -15,27 +15,27 @@ void main() {
     });
 
     test('should add a task', () {
-      repository.addTask(const Task(id: '1', title: 'Task 1'));
+      repository.addTask(Task(id: '1', title: 'Task 1'));
       expect(repository.tasks.length, 1);
       expect(repository.tasks.first.title, 'Task 1');
     });
 
     test('should delete a task by id', () {
-      repository.addTask(const Task(id: '1', title: 'Task 1'));
-      repository.addTask(const Task(id: '2', title: 'Task 2'));
+      repository.addTask(Task(id: '1', title: 'Task 1'));
+      repository.addTask(Task(id: '2', title: 'Task 2'));
       repository.deleteTask('1');
       expect(repository.tasks.length, 1);
       expect(repository.tasks.first.id, '2');
     });
 
     test('should update a task title', () {
-      repository.addTask(const Task(id: '1', title: 'Old Title'));
+      repository.addTask(Task(id: '1', title: 'Old Title'));
       repository.updateTask('1', 'New Title');
       expect(repository.tasks.first.title, 'New Title');
     });
 
     test('should toggle a task completed status', () {
-      repository.addTask(const Task(id: '1', title: 'Task'));
+      repository.addTask(Task(id: '1', title: 'Task'));
       expect(repository.tasks.first.completed, false);
       repository.toggleTask('1');
       expect(repository.tasks.first.completed, true);
@@ -44,16 +44,16 @@ void main() {
     });
 
     test('should clear all tasks', () {
-      repository.addTask(const Task(id: '1', title: 'Task 1'));
-      repository.addTask(const Task(id: '2', title: 'Task 2'));
+      repository.addTask(Task(id: '1', title: 'Task 1'));
+      repository.addTask(Task(id: '2', title: 'Task 2'));
       repository.clear();
       expect(repository.tasks, isEmpty);
     });
 
     test('should return unmodifiable list', () {
-      repository.addTask(const Task(id: '1', title: 'Task'));
+      repository.addTask(Task(id: '1', title: 'Task'));
       expect(
-        () => repository.tasks.add(const Task(id: '2', title: 'Fail')),
+        () => repository.tasks.add(Task(id: '2', title: 'Fail')),
         throwsUnsupportedError,
       );
     });
